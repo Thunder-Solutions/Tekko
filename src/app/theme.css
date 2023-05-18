@@ -6,9 +6,16 @@
 :root {
 
   /* Static colors regardless of theme */
-  --color-brand-1: #413451;
-  --color-brand-1-c: #ffffff;
-  --color-brand-2: #71b5db;
+  --color-brand-1: #19161B;
+  --color-brand-2: #A1ABCC;
+  --color-brand-3: #1AA8E4;
+
+  /*
+  dark: #172040
+  light: #b3bccc
+  accent dark: #0024bd
+  accent light: #5799ae
+  */
 
   /* These colors are intended to contrast against images
     no matter which theme is used. */
@@ -65,18 +72,10 @@ body,
 :root.base {
 
   /* Colors */
-  --color-site-1: #5d5d68;
-  --color-site-1-c: #dce6e9;
-  --color-site-2: #3c5868;
-  --color-site-2-c: #c8deeb;
-  --color-site-2-1: #224559;
-
-  --color-accent-1: #98e9f2;
-  --color-accent-1-1: #60befc;
-  --color-accent-1-c: #000000;
-  --color-accent-2: #0067b6;
-  --color-accent-2-1: #1544df;
-  --color-accent-2-c: #ffffff;
+  --color-site-1: #5B78AB;
+  --color-site-1-c: #fff;
+  --color-site-2: #fff;
+  --color-site-2-c: #000;
 
   --color-disabled-1: #373434;
   --color-disabled-1-c: #6f6d6d;
