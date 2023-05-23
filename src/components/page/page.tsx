@@ -1,13 +1,21 @@
 import React from 'react';
-import css from './page.module.css';
+import { Scope, css } from 'react-shadow-scope';
+
+const stylesheet = css`
+.page {
+  background-color: var(--color-site-1);
+}
+`;
 
 type PageProps = React.PropsWithChildren
 
 const Page = ({ children }: PageProps) => {
   return (
-    <main className={css.page}>
-      {children}
-    </main>
+    <Scope stylesheet={stylesheet}>
+      <main className="page">
+        {children}
+      </main>
+    </Scope>
   );
 }
 
