@@ -1,9 +1,9 @@
-import Page from '../components/page/page';
+import Page from '../components/page';
 
 export default function Home() {
   return (
-    <Page>
-      <h1>test</h1>
+    <Page coverImg="photos/photo.jpg" heading="Register Now!">
+      Page content here
     </Page>
   );
 }
