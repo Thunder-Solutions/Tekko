@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Scope, css } from 'react-shadow-scope';
+import MenuBar from './menuBar';
 
 const stylesheet = css`
 .pageHeader {
@@ -40,7 +41,7 @@ const PageHeader = ({ children, coverImg }: PageHeaderProps) => {
   return (
     <Scope stylesheet={stylesheet} slottedContent={children}>
       <header className="pageHeader" style={{ backgroundImage: `url(${coverImg})` }}>
-        <menu>menu</menu>
+        <MenuBar />
         <div className="content">
           <slot></slot>
         </div>
