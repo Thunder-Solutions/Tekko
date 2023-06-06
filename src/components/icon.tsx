@@ -3,6 +3,9 @@ import { Scope, css } from 'react-shadow-scope';
 import {
   FaBars,
 } from 'react-icons/fa';
+import {
+  AiOutlineCloseSquare,
+} from 'react-icons/ai'
 
 const stylesheet = css`
   .icon {
@@ -14,6 +17,7 @@ const stylesheet = css`
 
 const iconTypes = {
   menu: FaBars,
+  close: AiOutlineCloseSquare,
 }
 
 export type IconProps = {
