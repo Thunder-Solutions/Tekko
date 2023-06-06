@@ -18,7 +18,7 @@ const stylesheet = css`
   background-image: linear-gradient(transparent, var(--color-site-1));
   content: '';
   display: block;
-  height: 20rem;
+  height: 15rem;
   pointer-events: none;
   position: absolute;
   bottom: 0;
@@ -40,7 +40,7 @@ export type PageHeaderProps = React.PropsWithChildren & {
 const PageHeader = ({ children, coverImg }: PageHeaderProps) => {
   return (
     <Scope stylesheet={stylesheet} slottedContent={children}>
-      <header className="pageHeader" style={{ backgroundImage: `url(${coverImg})` }}>
+      <header className="pageHeader" style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${coverImg})` }}>
         <MenuBar />
         <div className="content">
           <slot></slot>
