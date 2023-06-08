@@ -5,9 +5,16 @@ import { Scope, css } from 'react-shadow-scope';
 const stylesheet = css`
   .link {
     border-bottom: 0.1rem solid;
-    color: var(--color-site-1-c);
+    color: var(--color-accent-1-c);
     display: inline-block;
+    padding-bottom: 0;
     text-decoration: none;
+    transition: color 0.3s, padding 0.3s, border 0.3s;
+  }
+  .link:hover {
+    border-bottom-width: 0.3rem;
+    color: var(--color-accent-1);
+    padding-bottom: 0.3rem;
   }
 `;
 

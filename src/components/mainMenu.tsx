@@ -27,13 +27,15 @@ const stylesheet = css`
     left: -100%;
   }
   header {
+    background-color: var(--color-brand-2);
+    color: var(--color-brand-1);
     place-items: center;
     display: flex;
     justify-content: space-between;
     padding: 1rem;
   }
   h1 {
-    font-family: Orbitron;
+    font-family: var(--font-display);
     font-weight: normal;
     margin: 0;
   }
@@ -42,6 +44,10 @@ const stylesheet = css`
     border: none;
     color: inherit;
     cursor: pointer;
+    transition: color 0.3s;
+  }
+  button:hover {
+    color: var(--color-accent-1);
   }
 `;
 

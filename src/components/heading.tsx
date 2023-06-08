@@ -5,7 +5,7 @@ import { Scope, css } from 'react-shadow-scope';
 
 const stylesheet = css`
 .heading {
-  font-family: "Orbitron";
+  font-family: var(--font-display);
   font-weight: normal;
   font-size: 6rem;
   margin: 0;
