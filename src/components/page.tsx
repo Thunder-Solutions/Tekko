@@ -4,6 +4,7 @@ import React from 'react';
 import { Scope, css } from 'react-shadow-scope';
 import PageHeader from './pageHeader';
 import Heading from './heading';
+import Paragraph from './paragraph';
 
 const stylesheet = css`
 .page {
@@ -38,7 +39,9 @@ const Page = ({ children, coverImg, heading1, heading2 }: PageProps) => {
         </Heading>
       </PageHeader>
       <main className="page">
-        <slot></slot>
+        <Paragraph>
+          <slot></slot>
+        </Paragraph>
       </main>
     </Scope>
   );

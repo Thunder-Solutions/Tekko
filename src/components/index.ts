@@ -6,3 +6,4 @@ export { default as Icon } from './icon';
 export { default as Link } from './link';
 export { default as MainMenu } from './mainMenu';
 export { default as MainMenuItem } from './mainMenuItem';
+export { default as Paragraph } from './paragraph';

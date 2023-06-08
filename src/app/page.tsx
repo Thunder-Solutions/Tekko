@@ -1,5 +1,5 @@
 import { getPageContent } from '@/api-client';
-import Page from '../components/page';
+import Page from '@/components/page';
 
 export default async function Home() {
   const pageContent = await getPageContent('home');

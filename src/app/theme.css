@@ -26,7 +26,7 @@ https://levelup.gitconnected.com/air-naming-css-color-variables-437cb4d261a6
 
   /* Default fonts, before theme overrides */
   --font-display: 'Orbitron', serif;
-  --font-content: 'Open Sans', sans-serif;
+  --font-content: 'Jura', sans-serif;
 
   /* Setting as few document defaults as possible in favor of
     encapsulated CSS at the component level */
