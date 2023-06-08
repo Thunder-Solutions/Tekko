@@ -31,8 +31,8 @@ export type MenuBarProps = {};
 
 const MenuBar = (props: MenuBarProps) => {
 
-  const openState = useState(true);
-  const [open, setOpen] = openState;
+  const openState = useState(false);
+  const setOpen = openState[1];
 
   const openMenu = () => {
     setOpen(true);

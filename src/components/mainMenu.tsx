@@ -22,7 +22,7 @@ const stylesheet = css`
     width: 75vw;
     z-index: 100;
   }
-  [aria-hidden="true"] {
+  [aria-hidden=true] {
     box-shadow: none;
     left: -100%;
   }
