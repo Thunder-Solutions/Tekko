@@ -1,22 +1,21 @@
 'use client';
 
 import React from 'react';
-import { Scope, css } from 'react-shadow-scope';
-
-const stylesheet = css`
-.heading {
-  font-family: var(--font-display);
-  font-weight: normal;
-  font-size: 6rem;
-  margin: 0;
-}
-`;
+import { Scope, useCSS } from 'react-shadow-scope';
 
 export type HeadingProps = React.PropsWithChildren;
 
 const Heading = ({ children }: HeadingProps) => {
+  const css = useCSS();
   return (
-    <Scope stylesheet={stylesheet} slottedContent={children}>
+    <Scope slottedContent={children} stylesheet={css`
+      .heading {
+        font-family: var(--font-display);
+        font-weight: normal;
+        font-size: 6rem;
+        margin: 0;
+      }
+    `}>
       <h1 className="heading">
         <slot></slot>
       </h1>

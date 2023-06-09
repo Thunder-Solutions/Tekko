@@ -1,19 +1,11 @@
 import React from 'react';
-import { Scope, css } from 'react-shadow-scope';
+import { Scope, useCSS } from 'react-shadow-scope';
 import {
   FaBars,
 } from 'react-icons/fa';
 import {
   AiOutlineCloseSquare,
 } from 'react-icons/ai'
-
-const stylesheet = css`
-  .icon {
-    align-items: center;
-    display: flex;
-    font-size: 4rem;
-  }
-`;
 
 const iconTypes = {
   menu: FaBars,
@@ -25,13 +17,18 @@ export type IconProps = {
 };
 
 const Icon = ({ type, ...props }: IconProps) => {
-  
+  const css = useCSS();
   const IconComponent = iconTypes[type];
-
   if (!IconComponent) return <span {...props}>(no icon)</span>;
 
   return (
-    <Scope stylesheet={stylesheet}>
+    <Scope stylesheet={css`
+      .icon {
+        align-items: center;
+        display: flex;
+        font-size: 4rem;
+      }
+    `}>
       <span className="icon" {...props}>
         <IconComponent />
       </span>
