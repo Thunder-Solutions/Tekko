@@ -1,22 +1,28 @@
 {
-  "name": "tekko",
-  "version": "0.1.0",
+  "name": "vue-nuxt-storyblok-boilerplate",
+  "version": "1.0.0",
+  "description": "Tekko | Anime Convention of Pittsburgh",
+  "author": "Alexander Feiglstorfer <delooks@gmail.com>",
+  "title": "Tekko | Anime Convention of Pittsburgh",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
   },
   "dependencies": {
-    "@types/node": "20.2.1",
-    "@types/react": "18.2.6",
-    "@types/react-dom": "18.2.4",
-    "eslint": "8.40.0",
-    "eslint-config-next": "13.4.2",
-    "next": "13.4.2",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "typescript": "5.0.4"
+    "@thundersolutions/access": "^0.1.16",
+    "cross-env": "^5.2.0",
+    "nuxt": "^2.16.3",
+    "storyblok-nuxt": "1.0.0",
+    "thunder-events": "^0.3.3",
+    "vuex": "^3.1.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.6.0",
+    "eslint-plugin-vue": "^6.0.0",
+    "nodemon": "^1.11.0"
   }
 }

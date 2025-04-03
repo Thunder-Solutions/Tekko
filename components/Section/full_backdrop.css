@@ -1,0 +1,103 @@
+.section.section--full_backdrop {
+  --section-theme-primary: var(--color-primary-contrast-base);
+  --section-theme-secondary: var(--color-primary-base);
+  --section-theme-focus: var(--color-primary-contrast-base);
+  padding: var(--size-8) var(--size-1);
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.section--full_backdrop::before,
+.section--full_backdrop::after {
+  --angle-height: var(--size-5);
+  content: '';
+  width: 100%;
+  position: absolute;
+  left: 0;
+}
+
+.section--full_backdrop::before {
+  --bg-offset: var(--size-2);
+  background-color: var(--color-primary-base);
+  height: calc(100% + var(--bg-offset));
+  top: calc(var(--bg-offset) * -1);
+  z-index: -2;
+  clip-path: polygon(
+    0 0,
+    calc(45% - var(--angle-height)) 0,
+    45% var(--angle-height),
+    100% var(--angle-height),
+    100% 100%,
+    0 100%
+  );
+}
+
+.section--full_backdrop:first-child::before {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    0 100%
+  );
+}
+
+.section--full_backdrop::after {
+  background-image: var(--section-background);
+  background-size: cover;
+  background-position: center center;
+  top: 0;
+  height: 100%;
+  z-index: -1;
+  clip-path: polygon(
+    0 0,
+    calc(45% - var(--angle-height)) 0,
+    45% var(--angle-height),
+    100% var(--angle-height),
+    100% 100%,
+    45% 100%,
+    calc(45% - var(--angle-height)) calc(100% - var(--angle-height)),
+    0 calc(100% - var(--angle-height))
+  );
+}
+
+.section--full_backdrop {
+  top: var(--size-5);
+  margin-top: calc(var(--size-5) * -1);
+}
+
+.section--full_backdrop:last-child {
+  top: 0;
+  margin-top: 0;
+}
+
+.section--full_backdrop + .section:not(.section--full_backdrop):not(.section--full_backdrop_light) {
+  margin-top: var(--size-5);
+}
+
+.section--full_backdrop .title {
+  text-align: center;
+  font-size: var(--size-4);
+  padding: var(--size-2) 0;
+}
+
+.section--full_backdrop .title::after {
+  content: '';
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+  height: var(--size-2);
+  border-bottom: 1px solid;
+}
+
+.section--full_backdrop .container {
+  --content-max-width: 820px;
+  background-color: var(--color-primary-base);
+  color: var(--color-primary-contrast-base);
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: var(--size-4) 0 var(--size-5);
+  box-sizing: border-box;
+}

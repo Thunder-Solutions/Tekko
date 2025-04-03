@@ -1,0 +1,131 @@
+.section.section--full_backdrop_light {
+  --section-theme-primary: var(--color-primary-base);
+  --section-theme-secondary: var(--color-primary-contrast-alt);
+  --section-theme-focus: var(--color-primary-focus);
+  padding: var(--size-8) var(--size-1);
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.section--full_backdrop_light::before,
+.section--full_backdrop_light::after {
+  --angle-height: var(--size-5);
+  content: '';
+  width: 100%;
+  position: absolute;
+  left: 0;
+}
+
+.section--full_backdrop_light::before {
+  --bg-offset: var(--size-2);
+  background-color: var(--color-primary-contrast-alt);
+  height: calc(100% + var(--bg-offset));
+  top: 0;
+  z-index: 0;
+  clip-path: polygon(
+    0 0,
+    calc(45% - var(--angle-height)) 0,
+    45% var(--angle-height),
+    100% var(--angle-height),
+    100% 100%,
+    45% 100%,
+    calc(45% - var(--angle-height)) calc(100% - var(--angle-height)),
+    0 calc(100% - var(--angle-height))
+  );
+  opacity: 0.9;
+}
+
+.section--full_backdrop_light:first-child::before {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    0 100%
+  );
+}
+
+.section--full_backdrop_light::after {
+  background-image: var(--section-background);
+  background-size: cover;
+  background-position: center center;
+  top: 0;
+  height: 100%;
+  z-index: -1;
+  clip-path: polygon(
+    0 0,
+    calc(45% - var(--angle-height)) 0,
+    45% var(--angle-height),
+    100% var(--angle-height),
+    100% 100%,
+    45% 100%,
+    calc(45% - var(--angle-height)) calc(100% - var(--angle-height)),
+    0 calc(100% - var(--angle-height))
+  );
+  filter: blur(5px) grayscale(100%) sepia(100%) hue-rotate(180deg);
+  overflow: hidden;
+}
+
+.section--full_backdrop_light:first-child::after {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    45% 100%,
+    calc(45% - var(--angle-height)) calc(100% - var(--angle-height)),
+    0 calc(100% - var(--angle-height))
+  );
+}
+
+.section--full_backdrop_light:last-child::before,
+.section--full_backdrop_light:last-child::after {
+  clip-path: polygon(
+    0 0,
+    calc(45% - var(--angle-height)) 0,
+    45% var(--angle-height),
+    100% var(--angle-height),
+    100% 100%,
+    0 100%
+  );
+}
+
+.section--full_backdrop_light {
+  top: var(--size-5);
+  margin-top: calc(var(--size-5) * -1);
+}
+
+.section--full_backdrop_light:last-child {
+  top: 0;
+  margin-top: 0;
+}
+
+.section--full_backdrop_light + .section:not(.section--full_backdrop_light):not(.section--full_backdrop) {
+  margin-top: var(--size-5);
+}
+
+.section--full_backdrop_light .title {
+  text-align: center;
+  font-size: var(--size-4);
+  padding: var(--size-2) 0;
+}
+
+.section--full_backdrop_light .title::after {
+  content: '';
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+  height: var(--size-2);
+  border-bottom: 1px solid;
+}
+
+.section--full_backdrop_light .container {
+  --content-max-width: 820px;
+  color: var(--color-primary-base);
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
