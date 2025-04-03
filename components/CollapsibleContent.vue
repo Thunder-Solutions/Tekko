@@ -12,9 +12,9 @@
         >{{ expandCollapseText }}</span></button>
       </div>
       <div
-        :aria-hidden="!expanded"
+        :inert="fullyCollapsed"
         class="collapsible"
-        :class="collapsibleClass + ' ' + visibleClass"
+        :class="collapsibleClass"
       >
         <component
           :key="blok._uid"
@@ -115,13 +115,12 @@
   }
 
   .collapsible--collapsed {
+    position: absolute;
     opacity: 0;
   }
 
-  .hidden {
-    position: absolute;
-    visibility: hidden;
-    top: -100%;
+  .collapsible[inert] {
+    display: none;
   }
 
   @media (min-width: 700px) {
@@ -151,7 +150,7 @@
     data() {
       return {
         expanded: false,
-        visible: false,
+        fullyCollapsed: true,
       }
     },
     computed: {
@@ -165,15 +164,14 @@
       collapsibleClass() {
         return this.expanded ? 'collapsible--expanded' : 'collapsible--collapsed'
       },
-      visibleClass() {
-        return this.visible ? 'visible' : 'hidden'
-      },
     },
     methods: {
       toggleExpanded() {
-        this.expanded = !this.expanded
-        if (this.expanded) this.visible = true
-        else setTimeout(() => this.visible = false, 500)
+        this.fullyCollapsed = false
+        requestAnimationFrame(() => {
+          this.expanded = !this.expanded
+          if (!this.expanded) setTimeout(() => this.fullyCollapsed = true, 500)
+        })
       },
     },
   }
