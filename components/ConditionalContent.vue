@@ -33,39 +33,39 @@
     computed: {
       ...mapGetters(['currentEndDate', 'currentStartDate', 'nextStartDate', 'host']),
       showContent() {
-        const {blok} = this.$props
+        const { blok } = this.$props
 
-        // get dates
-        const now = Date.now()
-        const endDate = this.currentEndDate.fullDate
-        const {start_showing, stop_showing, event_dates} = blok
-        const eventEnd = endDate.getTime()
-        const weekAfter = new Date(endDate)
-        weekAfter.setDate(endDate.getDate() + 7)
-        const customStart = DateParser(start_showing).fullDate
-        const customEnd = DateParser(stop_showing).fullDate
-
-        // options
-        const usingEventDate = event_dates !== ''
-        const isShowBeforeEvent = usingEventDate ? event_dates === 'show_before' : true
-        const isShowBeforeWeekAfter = usingEventDate ? event_dates === 'show_before_following_week' : true
-        const isShowAfterEvent = usingEventDate ? event_dates === 'show_after' : true
-        const isShowBeforeCustom = stop_showing !== '' ? now <= customEnd : true
-        const isShowAfterCustom = start_showing !== '' ? now >= customStart : true
-
-        // conditions
-        const isBeforeEvent = now < eventEnd
-        const isBeforeWeekAfter = now < weekAfter
-        const withinCustomTime = isShowBeforeCustom && isShowAfterCustom
-        const withinEventTime =
-          (isShowBeforeEvent && isBeforeEvent)
-          || (isShowBeforeWeekAfter && isBeforeWeekAfter)
-          || (isShowAfterEvent && !isBeforeEvent)
-
+        // early returns
         if (blok.force_show) return true
         if (blok.staging_only && !this.hostIsStaging) return false
         if (blok.manually_hide) return false
-        return withinCustomTime && withinEventTime
+
+        const { start_showing, stop_showing, event_dates } = blok
+        const usingEventDate = event_dates !== ''
+        const usingCustomDate = start_showing !== '' || stop_showing !== ''
+
+        // skip if no dates
+        if (!usingEventDate && !usingCustomDate) return true
+
+        // can't use both event dates and custom dates
+        if (usingCustomDate) {
+          const customStart = DateParser(start_showing).fullDate
+          const customEnd = DateParser(stop_showing).fullDate
+          const isShowBeforeCustom = stop_showing !== '' ? now <= customEnd : true
+          const isShowAfterCustom = start_showing !== '' ? now >= customStart : true
+          const withinCustomTime = isShowBeforeCustom && isShowAfterCustom
+          return withinCustomTime
+        }
+
+        // event dates
+        const now = Date.now()
+        const endDate = this.currentEndDate.fullDate
+        const weekAfter = new Date(endDate)
+        weekAfter.setDate(endDate.getDate() + 7)
+
+        return (event_dates === 'show_before' && now <= endDate.getTime())
+          || (event_dates === 'show_before_following_week' && now < weekAfter.getTime())
+          || (event_dates === 'show_after' && now > endDate.getTime())
       },
       hostIsStaging() {
         if (typeof window === 'undefined') return false
