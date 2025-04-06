@@ -71,11 +71,7 @@
       },
       checkStaging() {
         const {blok} = this.$props
-        const hostIsStaging = this.host && (
-          this.host.startsWith('tekko-staging')
-          || this.host.startsWith('develop')
-          || this.host.startsWith('localhost')
-        )
+        const hostIsStaging = location.host.startsWith('develop') || location.host.startsWith('localhost')
         return blok.staging_only ? hostIsStaging : true
       },
       showMessage() {
