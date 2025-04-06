@@ -86,8 +86,7 @@
         }
       },
       hostIsStaging() {
-        if (typeof window === 'undefined') return false
-        return location.hostname !== 'tekko.us'
+        return this.host !== 'tekko.us'
       },
       showMessage() {
         const {blok} = this.$props
