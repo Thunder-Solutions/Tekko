@@ -61,22 +61,19 @@
           (isShowBeforeEvent && isBeforeEvent)
           || (isShowBeforeWeekAfter && isBeforeWeekAfter)
           || (isShowAfterEvent && !isBeforeEvent)
-        const allShowOptions =
-          this.checkStaging
-          && !blok.manually_hide
-          && withinCustomTime
-          && withinEventTime
-        
-        return blok.force_show || allShowOptions 
+
+        if (blok.force_show) return true
+        if (blok.staging_only && !this.hostIsStaging) return false
+        if (blok.manually_hide) return false
+        return withinCustomTime && withinEventTime
       },
-      checkStaging() {
-        const {blok} = this.$props
-        const hostIsStaging = location.host.startsWith('develop') || location.host.startsWith('localhost')
-        return blok.staging_only ? hostIsStaging : true
+      hostIsStaging() {
+        if (typeof window === 'undefined') return false
+        return location.hostname !== 'tekko.us'
       },
       showMessage() {
         const {blok} = this.$props
-        return !blok.disable_message && this.checkStaging
+        return !blok.disable_message && this.hostIsStaging
       },
       expiredMessage() {
         const customMessage = this.$props.blok.expired_message
