@@ -35,6 +35,15 @@
       showContent() {
         const { blok } = this.$props
 
+        console.log('showContent', {
+          force_show: blok.force_show,
+          staging_only: blok.staging_only,
+          manually_hide: blok.manually_hide,
+          usingCustomDate: blok.start_showing !== '' || blok.stop_showing !== '',
+          usingEventDate: blok.event_dates !== '',
+          hostIsStaging: this.hostIsStaging,
+        })
+
         // early returns
         if (blok.force_show) return true
         if (blok.staging_only && !this.hostIsStaging) return false
@@ -54,6 +63,7 @@
           const isShowBeforeCustom = stop_showing !== '' ? now <= customEnd : true
           const isShowAfterCustom = start_showing !== '' ? now >= customStart : true
           const withinCustomTime = isShowBeforeCustom && isShowAfterCustom
+          console.log('withinCustomTime', withinCustomTime)
           return withinCustomTime
         }
 
@@ -63,6 +73,9 @@
         const weekAfter = new Date(endDate)
         weekAfter.setDate(endDate.getDate() + 7)
 
+        console.log('withinEventTime', (event_dates === 'show_before' && now <= endDate.getTime())
+          || (event_dates === 'show_before_following_week' && now < weekAfter.getTime())
+          || (event_dates === 'show_after' && now > endDate.getTime()))
         return (event_dates === 'show_before' && now <= endDate.getTime())
           || (event_dates === 'show_before_following_week' && now < weekAfter.getTime())
           || (event_dates === 'show_after' && now > endDate.getTime())
