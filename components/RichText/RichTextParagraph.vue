@@ -5,14 +5,14 @@
       <span
         class="richText__inline"
         v-if="!inline.marks"
-        :key="index"
+        :key="id + '_' + index"
       >{{ inline.text }}</span>
 
       <template v-else>
 
         <dynamic-link
           v-if="getLinkHref(inline.marks)"
-          :key="index"
+          :key="'link_' + id + '_' + index"
           :href="getLinkHref(inline.marks)"
           class="richText__inline--link"
           :class="getMarkClassList(inline.marks)"
@@ -20,13 +20,13 @@
 
         <code
           v-if="isCode(inline.marks)"
-          :key="index"
+          :key="'code_' + id + '_' + index"
           :class="getMarkClassList(inline.marks)"
         >{{ inline.text }}</code>
 
         <span
           v-if="isPlain(inline.marks)"
-          :key="index"
+          :key="'span_' + id + '_' + index"
           :class="getMarkClassList(inline.marks)"
         >{{ inline.text }}</span>
         
@@ -34,7 +34,7 @@
 
       <img
         :alt="inline.attrs.alt"
-        :key="index"
+        :key="'img_' + id + '_' + index"
         tabindex="-1"
         v-if="inline.type === 'image'"
         :src="inline.attrs.src"
@@ -108,8 +108,14 @@
 </style>
 
 <script>
+import { randomUUID } from '~/utilities'
 export default {
   props: ['content'],
+  computed: {
+    id() {
+      return randomUUID()
+    },
+  },
   methods: {
     getLinkHref(marks) {
       const link = marks.find(mark => mark.type === 'link')

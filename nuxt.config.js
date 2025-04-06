@@ -60,10 +60,13 @@ module.exports = {
         ...config,
         resolve: {
           ...config.resolve,
-          alias: Object.keys(config.resolve.alias).reduce((alias, key) => {
-            if (key !== '@') alias[key] = config.resolve.alias[key]
-            return alias
-          }, {}),
+          alias: {
+            ...Object.keys(config.resolve.alias).reduce((alias, key) => {
+              if (key !== '@') alias[key] = config.resolve.alias[key]
+              return alias
+            }, {}),
+            '~': __dirname,
+          },
         },
       }
     },

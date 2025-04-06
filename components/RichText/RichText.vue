@@ -4,26 +4,25 @@
 
       <rich-text-paragraph
         v-if="is('paragraph', contentGroup)"
-        :key="index"
+        :key="id + '_' + index"
         :content="contentGroup.content"
-      >
-      </rich-text-paragraph>
+      ></rich-text-paragraph>
 
       <rich-text-code
         v-if="is('code', contentGroup)"
-        :key="index"
+        :key="id + '_' + index"
         :code-block="contentGroup"
       ></rich-text-code>
 
       <rich-text-list
         v-if="is('list', contentGroup)"
-        :key="index"
+        :key="id + '_' + index"
         :list="contentGroup"
       ></rich-text-list>
 
       <rich-text-quote
         v-if="is('quote', contentGroup)"
-        :key="index"
+        :key="id + '_' + index"
         :quote="contentGroup"
       ></rich-text-quote>
 
@@ -36,10 +35,16 @@ import RichTextParagraph from './RichTextParagraph.vue'
 import RichTextList from './RichTextList.vue'
 import RichTextCode from './RichTextCode.vue'
 import RichTextQuote from './RichTextQuote.vue'
+import { randomUUID } from '~/utilities'
 
 export default {
   components: { RichTextParagraph, RichTextList, RichTextCode, RichTextQuote },
   props: ['doc'],
+  computed: {
+    id() {
+      return randomUUID()
+    },
+  },
   methods: {
     is(type, content) {
       const types = {

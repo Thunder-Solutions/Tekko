@@ -1,7 +1,7 @@
 <template>
   <pre class="prettyprint"><code
     v-for="(code, index) in codeBlock.content"
-    :key="index"
+    :key="id + '_' + index"
     :class="codeBlock.attrs.class"
   >{{ code.text }}</code></pre>
 </template>
@@ -16,8 +16,14 @@
 </style>
 
 <script>
+import { randomUUID } from '~/utilities'
 export default {
   props: ['code-block'],
+  computed: {
+    id() {
+      return randomUUID()
+    },
+  },
   mounted() {
     PR.prettyPrint()
   },

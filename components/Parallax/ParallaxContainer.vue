@@ -7,7 +7,7 @@
     <parallax-layer
       ref="layers"
       v-for="(layer, index) in layers"
-      :key="index"
+      :key="id + '_' + index"
       :src="layer.src"
       :layer="layer.layer"
       :customClass="layer.customClass"
@@ -28,6 +28,7 @@
 
 <script>
   import {sniffBrowser} from '~/assets/browserSniffer.js'
+  import { randomUUID } from '~/utilities'
 
   export default {
     props: ['layers'],
@@ -37,6 +38,11 @@
         prevTime: Date.now() - 1000,
         initialized: false,
       }
+    },
+    computed: {
+      id() {
+        return randomUUID()
+      },
     },
     methods: {
       scrollCallback() {

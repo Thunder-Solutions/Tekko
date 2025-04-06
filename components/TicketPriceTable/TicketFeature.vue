@@ -4,11 +4,9 @@
     <th scope="row" class="desktopHeader">
       {{blok.description}}
     </th>
-    <template v-for="(ticket_type, index) in blok.ticket_type">
-      <td :key="index" class="tableCell">
-        <semantic-icon :config="getIcon(ticket_type.has_feature)"></semantic-icon>
-      </td>
-    </template>
+    <td v-for="(ticket_type, index) in blok.ticket_type" :key="id + '_' + index" class="tableCell">
+      <semantic-icon :config="getIcon(ticket_type.has_feature)"></semantic-icon>
+    </td>
   </tr>
 </template>
 
@@ -36,6 +34,7 @@
 </style>
 
 <script>
+  import { randomUUID } from '~/utilities'
 
   export default {
     /**
@@ -48,6 +47,12 @@
      */
 
     props: ['blok'],
+
+    computed: {
+      id() {
+        return randomUUID()
+      },
+    },
 
     data() {
       return {

@@ -250,7 +250,6 @@
       toggleNavTabs(event, bool) {
         const {navTabWrapper, tabToggler} = this.$refs
         const expand = bool !== undefined ? bool : !this.navTabsExpanded
-        console.log('what the hell')
         this.navTabsExpanded = expand
         navTabWrapper.setAttribute('aria-hidden', String(!expand))
         tabToggler.setAttribute('aria-expanded', String(expand))
