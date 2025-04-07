@@ -56,7 +56,7 @@
       ...mapGetters(['currentEndDate', 'currentStartDate', 'nextStartDate', 'host']),
       showContent() {
         try {
-          if (typeof window !== 'undefined' && userInput === null) {
+          if (typeof window !== 'undefined' && userInput === null && this.hostIsStaging) {
             const pass = prompt('This content is only visible on staging. Please enter the password to view it.')
             userInput = pass
             if (pass !== 'TekkobotDefense2025') {
