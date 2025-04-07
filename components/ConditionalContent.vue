@@ -104,6 +104,7 @@
         }
       },
       hostIsStaging() {
+        console.log('host', this.host)
         return this.host !== 'tekko.us'
       },
       showMessage() {
