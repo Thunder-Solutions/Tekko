@@ -57,6 +57,7 @@
       showContent() {
         try {
           if (typeof window !== 'undefined' && userInput === null && this.hostIsStaging) {
+            userInput = ''
             const pass = prompt('This content is only visible on staging. Please enter the password to view it.')
             userInput = pass
             if (pass !== 'TekkobotDefense2025') {
