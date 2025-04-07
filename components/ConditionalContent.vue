@@ -13,7 +13,7 @@
         <template v-else>
           <p
             class="expiredMessage"
-            v-if="showMessage"
+            v-if="!blok.disable_message"
           >{{ expiredMessage }}</p>
         </template>
       </client-only>
@@ -30,7 +30,7 @@
       <template v-else>
         <p
           class="expiredMessage"
-          v-if="showMessage"
+          v-if="!blok.disable_message"
         >{{ expiredMessage }}</p>
       </template>
     </template>
@@ -52,16 +52,23 @@
 
   export default {
     props: ['blok'],
+    methods: {
+      incorrectAlert() {
+        setTimeout(() => {
+          alert('Incorrect password. This content is only visible on staging.')
+        }, 500)
+      },
+    },
     computed: {
       ...mapGetters(['currentEndDate', 'currentStartDate', 'nextStartDate', 'host']),
       showContent() {
         try {
-          if (typeof window !== 'undefined' && userInput === null && this.hostIsStaging) {
-            userInput = ''
+          const hostIsStaging = this.host !== undefined && this.host !== 'tekko.us'
+          if (typeof window !== 'undefined' && userInput === null && hostIsStaging) {
             const pass = prompt('This content is only visible on staging. Please enter the password to view it.')
-            userInput = pass
-            if (pass !== 'TekkobotDefense2025') {
-              alert('Incorrect.  Showing the public content only.')
+            userInput = pass ?? ''
+            if (userInput !== 'TekkobotDefense2025') {
+              this.incorrectAlert()
               return false
             }
           }
@@ -69,7 +76,7 @@
 
           // early returns
           if (blok.force_show) return true
-          if (blok.staging_only && !this.hostIsStaging) return false
+          if (blok.staging_only && !hostIsStaging) return false
           if (blok.manually_hide) return false
 
           const { start_showing, stop_showing, event_dates } = blok
@@ -102,14 +109,6 @@
           console.error('Error in conditional content:', e)
           return false
         }
-      },
-      hostIsStaging() {
-        console.log('host', this.host)
-        return this.host !== 'tekko.us'
-      },
-      showMessage() {
-        const {blok} = this.$props
-        return !blok.disable_message && this.hostIsStaging
       },
       expiredMessage() {
         const customMessage = this.$props.blok.expired_message
