@@ -1,18 +1,38 @@
 <template>
   <div v-editable="blok">
-    <template v-if="showContent">
-      <component
-        :key="blok._uid"
-        v-for="blok in blok.content"
-        :blok="blok"
-        :is="blok.component | dashify"
-      ></component>
+    <template v-if="blok.staging_only">
+      <client-only>
+        <template v-if="showContent">
+          <component
+            :key="blok._uid"
+            v-for="blok in blok.content"
+            :blok="blok"
+            :is="blok.component | dashify"
+          ></component>
+        </template>
+        <template v-else>
+          <p
+            class="expiredMessage"
+            v-if="showMessage"
+          >{{ expiredMessage }}</p>
+        </template>
+      </client-only>
     </template>
     <template v-else>
-      <p
-        class="expiredMessage"
-        v-if="showMessage"
-      >{{ expiredMessage }}</p>
+      <template v-if="showContent">
+        <component
+          :key="blok._uid"
+          v-for="blok in blok.content"
+          :blok="blok"
+          :is="blok.component | dashify"
+        ></component>
+      </template>
+      <template v-else>
+        <p
+          class="expiredMessage"
+          v-if="showMessage"
+        >{{ expiredMessage }}</p>
+      </template>
     </template>
   </div>
 </template>
