@@ -48,12 +48,22 @@
   import DateParser from '~/assets/DateParser.js'
   import {mapGetters} from 'vuex'
 
+  let userInput = null
+
   export default {
     props: ['blok'],
     computed: {
       ...mapGetters(['currentEndDate', 'currentStartDate', 'nextStartDate', 'host']),
       showContent() {
         try {
+          if (typeof window !== 'undefined' && userInput === null) {
+            const pass = prompt('This content is only visible on staging. Please enter the password to view it.')
+            userInput = pass
+            if (pass !== 'TekkobotDefense2025') {
+              alert('Incorrect.  Showing the public content only.')
+              return false
+            }
+          }
           const { blok } = this.$props
 
           // early returns
