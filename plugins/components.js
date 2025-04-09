@@ -32,6 +32,7 @@ import Action from '~/components/CallToAction/Action.vue'
 import Group from '~/components/Group.vue'
 import ThunderEventsVue from '~/components/ThunderEvents.vue'
 import SwitchControl from '~/components/SwitchControl.vue'
+import ButtonLink from '~/components/ButtonLink.vue'
 
 // internal components
 Vue.component('global-menu-item', GlobalMenuItem)
@@ -69,3 +70,4 @@ Vue.component('blok-call--to--action', CallToAction)
 Vue.component('blok-action', Action)
 Vue.component('blok-group', Group)
 Vue.component('blok-thunder--events', ThunderEventsVue)
+Vue.component('blok-button--link', ButtonLink)
