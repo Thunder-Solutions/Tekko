@@ -1,6 +1,6 @@
 <template>
-  <div class="imageWrapper" :class="bannerClass" v-editable="blok">
-    <div class="imageContainer" :class="bannerClass">
+  <div class="image-wrapper" :class="bannerClass" v-editable="blok">
+    <div class="image-container" :class="bannerClass">
       <img :alt="blok.alt" class="image" :class="bannerClass" :src="blok.image"/>
     </div>
   </div>
@@ -12,18 +12,18 @@
     font-size: var(--size-3);
   }
 
-  .imageContainer {
+  .image-container {
     overflow: hidden;
     height: var(--size-8);
     max-width: var(--content-max-width);
     margin: 0 auto;
   }
 
-  .imageWrapper.banner {
+  .image-wrapper.banner {
     padding-bottom: var(--size-1);
   }
 
-  .imageContainer.banner {
+  .image-container.banner {
     box-shadow: var(--size-1) var(--size-1) 0 var(--color-primary-base);
   }
 
@@ -38,13 +38,22 @@
     object-fit: cover;
   }
 
-  .imageWrapper {
+  .image-wrapper.full-width,
+  .image-container.full-width,
+  .image.full-width {
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    object-fit: cover;
+  }
+
+  .image-wrapper {
     padding: var(--size-2);
     padding-bottom: 0;
   }
 
   @media (min-width: 1200px) {
-    .imageContainer {
+    .image-container {
       height: var(--size-9);
     }
   }
@@ -55,7 +64,9 @@
     props: ['blok'],
     computed: {
       bannerClass() {
-        return this.$props.blok.use_as_banner ? 'banner' : ''
+        const useAsBanner = this.$props.blok.use_as_banner
+        const isFullWidth = this.$props.blok.full_width
+        return (useAsBanner ? 'banner' : '') + (isFullWidth ? ' full-width' : '')
       },
     },
   }
