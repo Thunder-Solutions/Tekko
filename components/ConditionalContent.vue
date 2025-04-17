@@ -48,7 +48,9 @@
   import DateParser from '~/assets/DateParser.js'
   import {mapGetters} from 'vuex'
 
-  let userInput = null
+  const WEAK_PASSWORD = 'TekkobotDefense2025'
+  const fromStorage = typeof window === 'undefined' ? null : sessionStorage.getItem('staging_password')
+  let userInput = fromStorage
 
   export default {
     props: ['blok'],
@@ -66,11 +68,12 @@
           const hostIsStaging = this.host !== undefined && this.host !== 'tekko.us'
           if (typeof window !== 'undefined' && userInput === null && hostIsStaging) {
             const pass = prompt('This content is only visible on staging. Please enter the password to view it.')
-            userInput = pass ?? ''
-            if (userInput !== 'TekkobotDefense2025') {
+            if (pass !== WEAK_PASSWORD) {
               this.incorrectAlert()
               return false
             }
+            userInput = pass
+            sessionStorage?.setItem('staging_password', pass)
           }
           const { blok } = this.$props
 
