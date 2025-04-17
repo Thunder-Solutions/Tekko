@@ -33,7 +33,6 @@
           const iframeExceedsEmbed =
             embedEl.clientWidth < iframe.clientWidth ||
             this.originalWidth > iframe.clientWidth
-          console.log(useEmbedWidth, iframeExceedsEmbed)
 
           // add/remove event listeners with a timeout for debouncing
           window.removeEventListener('resize', this.resizeIFrame)
