@@ -20,29 +20,28 @@ main {
   display: grid;
   border-top: var(--size-2) solid var(--color-primary-base);
   padding-bottom: var(--size-7);
+}
+main :deep(.section--normal) {
+  padding: var(--size-4) var(--size-2) 0;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+}
+main :deep(.section--normal .title) {
+  padding: 0;
+  border-bottom: 1px solid;
+  background-color: transparent;
+  color: var(--color-primary-base);
+  font-size: var(--size-3); 
+}
 
-  :deep(.section--normal) {
-    padding: var(--size-4) var(--size-2) 0;
-    max-width: var(--content-max-width);
-    margin: 0 auto;
+@media (min-width: 960px) {
+  main :deep(.section--normal .title) {
+    display: block;
+    height: auto;
   }
-  :deep(.section--normal .title) {
-    padding: 0;
-    border-bottom: 1px solid;
-    background-color: transparent;
-    color: var(--color-primary-base);
-    font-size: var(--size-3); 
-  }
-
-  @media (min-width: 960px) {
-    :deep(.section--normal .title) {
-      display: block;
-      height: auto;
-    }
-    :deep(.section--normal .title::before),
-    :deep(.section--normal .title::after) {
-      display: none;
-    }
+  main :deep(.section--normal .title::before),
+  main :deep(.section--normal .title::after) {
+    display: none;
   }
 }
 </style>
