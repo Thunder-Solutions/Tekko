@@ -51,7 +51,7 @@
           }, 100)
         }
 
-        resizeIFrame() // run once initially
+        requestAnimationFrame(() => resizeIFrame()) // run once initially
 
         // make sure it's resized when it's revealed by collapsible content
         // TODO: maybe we can find a cleaner way to check when the content is being revealed

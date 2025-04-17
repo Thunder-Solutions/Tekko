@@ -263,7 +263,6 @@ export default {
   methods: {
     toggleAlertExpanded() {
       this.alertExpanded = !this.alertExpanded
-      console.log('worked')
     },
   },
   mounted() {
