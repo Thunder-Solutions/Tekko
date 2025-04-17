@@ -13,6 +13,7 @@
 main {
   display: grid;
   border-top: var(--size-2) solid var(--color-primary-base);
+  padding-bottom: var(--size-7);
   --section-theme-primary: var(--color-primary-base);
   --section-theme-secondary: var(--color-primary-contrast-alt);
   --section-theme-focus: var(--color-primary-focus);

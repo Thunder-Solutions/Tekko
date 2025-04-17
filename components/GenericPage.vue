@@ -1,13 +1,13 @@
 <template>
   <div v-editable="blok">
-    <main class="page">
+    <div class="page">
       <splash-image class="titleContainer">
         <h1 class="title">{{ blok.title }}</h1>
       </splash-image>
-      <section class="mainContent">
+      <div class="mainContent">
         <component :key="blok._uid" v-for="blok in blok.content" :blok="blok" :is="blok.component | dashify"></component>
-      </section>
-    </main>
+      </div>
+    </div>
   </div>
 </template>
 

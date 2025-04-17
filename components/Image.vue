@@ -42,8 +42,7 @@
   .image-container.full-width,
   .image.full-width {
     max-width: 100%;
-    padding-left: 0;
-    padding-right: 0;
+    padding: 0;
     object-fit: cover;
   }
 
