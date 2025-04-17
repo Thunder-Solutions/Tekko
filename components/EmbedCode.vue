@@ -21,41 +21,45 @@
       }
     },
     methods: {
-      updateEmbedCode() {
-        const {useEmbedHeight, useEmbedWidth} = this.$props
+      // resize an iframe to fill its container, and again when resizing window
+      resizeIFrame() {
         const embedEl = this.$refs.embed
-        const hasContent = embedEl.innerHTML.trim() !== ''
-        if (!hasContent) embedEl.innerHTML = this.$props.embed
-        
-        // resize an iframe to fill its container, and again when resizing window
-        const resizeIFrame = () => {
-          const iframe = embedEl && embedEl.querySelector('iframe')
-          if (!iframe) return
+        const {useEmbedHeight, useEmbedWidth} = this.$props
+        const iframe = embedEl && embedEl.querySelector('iframe')
+        if (!iframe) return
+        iframe.width = this.originalWidth
+        requestAnimationFrame(() => {
           iframe.onload = this.hasLoaded
           const iframeExceedsEmbed =
             embedEl.clientWidth < iframe.clientWidth ||
             this.originalWidth > iframe.clientWidth
+          console.log(useEmbedWidth, iframeExceedsEmbed)
 
           // add/remove event listeners with a timeout for debouncing
-          window.removeEventListener('resize', resizeIFrame)
+          window.removeEventListener('resize', this.resizeIFrame)
           setTimeout(() => {
-            if (!useEmbedHeight) {
+            if (useEmbedHeight === false) {
               iframe.height = 0
               iframe.height = embedEl.clientHeight
             }
-            if (!useEmbedWidth || iframeExceedsEmbed) {
+            if (useEmbedWidth === false || iframeExceedsEmbed) {
               iframe.width = 0
               iframe.width = embedEl.clientWidth
             }
-            window.addEventListener('resize', resizeIFrame)
+            window.addEventListener('resize', this.resizeIFrame)
           }, 100)
-        }
+        })
+      },
+      updateEmbedCode() {
+        const embedEl = this.$refs.embed
+        const hasContent = embedEl.innerHTML.trim() !== ''
+        if (!hasContent) embedEl.innerHTML = this.$props.embed
 
-        requestAnimationFrame(() => resizeIFrame()) // run once initially
+        this.resizeIFrame() // run once initially
 
         // make sure it's resized when it's revealed by collapsible content
         // TODO: maybe we can find a cleaner way to check when the content is being revealed
-        window.addEventListener('click', resizeIFrame)
+        window.addEventListener('click', this.resizeIFrame)
       },
       hasLoaded(event) {
         this.$emit('hasLoaded', event)
@@ -71,6 +75,10 @@
       const widthAttr = embed.match(/width="[^"]+"/g) || ['']
       this.originalWidth = +widthAttr[0].replace(/[^0-9]/g, '')
       this.updateEmbedCode()
+    },
+    destroyed() {
+      window.removeEventListener('resize', this.resizeIFrame)
+      window.removeEventListener('click', this.resizeIFrame)
     },
   }
 </script>
