@@ -1,7 +1,7 @@
 <template>
   <div v-editable="blok">
     <div class="page">
-      <splash-image class="titleContainer">
+      <splash-image class="titleContainer" :custom="blok.customImage">
         <h1 class="title">{{ blok.title }}</h1>
       </splash-image>
       <div class="mainContent">

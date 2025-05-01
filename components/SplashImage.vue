@@ -1,4 +1,3 @@
-<!-- Copy and paste this code as a quick way to create a new component -->
 <template>
   <div class="splashContainer">
 
@@ -58,7 +57,7 @@
   import {sniffBrowser} from '~/assets/browserSniffer.js'
 
   export default {
-    props: ['full'],
+    props: ['full', 'custom'],
     methods: {
       setView() {
         this.isDesktop = window.innerWidth > 860
@@ -81,7 +80,7 @@
           {src: this.splashImage || '/tekkobot-final.jpg', layer: 4, customClass: 'splashGearForeground full'},
           {src: '/1x/splash-gear-8.png', layer: 4, customClass: 'splashGear full'},
           {src: '/1x/splash-backdrop-8.png', layer: 2, customClass: 'full'},
-          {src: this.splashImage || '/tekkobot-final.jpg', layer: 2, customClass: 'normal'},
+          {src: this.$props.custom?.filename || this.splashImage || '/tekkobot-final.jpg', layer: 2, customClass: 'normal'},
         ]
       },
     },
