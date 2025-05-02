@@ -2,12 +2,11 @@
   <div class="navContainer">
     <button id="NavToggler" class="navToggler" ref="toggler">MENU</button>
     <nav ref="menu" class="navMenu" id="GlobalNav" aria-hidden="true">
-      <template v-for="item in menu">
-        <global-menu-item
-          :key="item._uid"
-          :item="item"
-        ></global-menu-item>
-      </template>
+      <global-menu-item
+        v-for="item in menu"
+        :key="item._uid"
+        :item="item"
+      ></global-menu-item>
     </nav>
   </div>
 </template>

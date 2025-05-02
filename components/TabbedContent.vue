@@ -81,6 +81,8 @@
   .tabContainer {
     padding: var(--size-4) var(--size-2) 0;
     max-width: var(--content-max-width);
+    width: 100vw;
+    box-sizing: border-box;
     margin: 0 auto;
     position: relative;
 

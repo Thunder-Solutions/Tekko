@@ -2,12 +2,11 @@
   <span class="navItem" :id="itemId">
     <storyblok-link class="navLink" :class="hasSubmenuClass" :id="hasSubmenu ? `${itemId}-SubNavToggler` : ''" :link="item.link">{{ item.text }}</storyblok-link>
     <span class="subNav" v-if="hasSubmenu" :id="`${itemId}-SubNav`" aria-hidden="true">
-      <template v-for="subItem in item.submenu">
-        <global-menu-item
-          :key="subItem._uid"
-          :item="subItem"
-        ></global-menu-item>
-      </template>
+      <global-menu-item
+        v-for="subItem in item.submenu"
+        :key="subItem._uid"
+        :item="subItem"
+      ></global-menu-item>
     </span>
   </span>
 </template>
